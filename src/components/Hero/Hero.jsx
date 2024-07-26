@@ -6,6 +6,7 @@ const Hero = () => {
   const [word, setWord] = useState('');
   const [definitions, setDefinitions] = useState([]);
   const [error, setError] = useState(null);
+  const [allWords, setAllWords] = useState([]);
 
   const handleInputChange = (e) => {
     setWord(e.target.value);
@@ -29,9 +30,28 @@ const Hero = () => {
     }
   };
 
+  const fetchAllWords = async () => {
+    try {
+      const response = await axios.get('https://random-word-api.herokuapp.com/word?number=1000');
+      const data = response.data;
+
+      if (Array.isArray(data)) {
+        setAllWords(data);
+      } else {
+        console.error('Unexpected response format');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchDefinitions();
+  };
+
+  const handleViewAllWords = () => {
+    fetchAllWords();
   };
 
   return (
@@ -67,6 +87,17 @@ const Hero = () => {
                   ))}
                 </div>
               ))}
+            </div>
+          )}
+          <button onClick={handleViewAllWords}>View All Words</button>
+          {allWords.length > 0 && (
+            <div className="all-words">
+              <h2>All Words:</h2>
+              <ul>
+                {allWords.map((word, index) => (
+                  <li key={index}>{word}</li>
+                ))}
+              </ul>
             </div>
           )}
         </div>
