@@ -53,62 +53,60 @@ const Hero = () => {
   };
 
   return (
-    <div className="hero_container">
-      <div className="hero_wrapper">
-        <div className="hero">
-          <h1>Homograph Detector</h1>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              value={word}
-              onChange={handleInputChange}
-              placeholder="Enter a word"
-            />
-            <button type="submit">Check</button>
-          </form>
-          {error && (
-            <div>
-              <p className="error">{error}</p>
-              <p>
-                This word is not a Homograph in our dictionary.<br/> If you're sure it is a homograph, please send us the word and definition.<br/> We'll definitely work on it as soon as possible.
-              </p>
-              {showFeedbackInput && (
-                <form onSubmit={handleFeedbackSubmit}>
-                  <input
-                    type="text"
-                    value={feedback}
-                    onChange={handleFeedbackChange}
-                    placeholder="Provide feedback (e.g. this word is a homograph with definition XYZ)"
-                  />
-                  <button type="submit">Submit Feedback</button>
-                </form>
-              )}
-            </div>
+    <div className="hero-container">
+      <h1>Homograph Detector</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={word}
+          onChange={handleInputChange}
+          placeholder="Enter a word"
+        />
+        <button type="submit">Check</button>
+      </form>
+      {error && (
+        <div>
+          <p className="error">{error}</p>
+          <p>
+            This word is not a Homograph in our dictionary.<br/> If you're sure it is a homograph, please send us the word and definition.<br/> We'll definitely work on it as soon as possible.
+          </p>
+          {showFeedbackInput && (
+            <form onSubmit={handleFeedbackSubmit}>
+              <input
+                type="text"
+                value={feedback}
+                onChange={handleFeedbackChange}
+                placeholder="Provide feedback (e.g. this word is a homograph with definition XYZ)"
+              />
+              <button type="submit">Submit Feedback</button>
+            </form>
           )}
-          {definitions.length > 0 && (
-            <div className="definitions">
-              <h2>The word "{word}" has {definitions.length} homographs:</h2>
-              {definitions.map((def, index) => (
-                <div key={index} className="definition">
-                  <h3>{def.word}</h3>
-                  {def.meanings.map((meaning, idx) => (
-                    <div key={idx}>
-                      <h4>{meaning.partOfSpeech}</h4>
-                      <ul>
-                        {meaning.definitions.map((d, i) => (
-                          <li key={i}>{d.definition}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+        </div>
+      )}
+      {definitions.length > 0 && (
+        <div className="definitions">
+          <h2>The word "{word}" has {definitions.length} homographs:</h2>
+          {definitions.map((def, index) => (
+            <div key={index} className="definition">
+              <h3>{def.word}</h3>
+              {def.meanings.map((meaning, idx) => (
+                <div key={idx}>
+                  <h4>{meaning.partOfSpeech}</h4>
+                  <ul>
+                    {meaning.definitions.map((d, i) => (
+                      <li key={i}>{d.definition}</li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
-          )}
-          <Link to="/all-words">
-            <button>View All Words</button>
-          </Link>
+          ))}
         </div>
+      )}
+      <div className="view-all-words">
+        <Link to="/all-words">
+          <button>View All Words</button>
+        </Link>
       </div>
     </div>
   );

@@ -1,139 +1,88 @@
-*{
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
- 
+.hero-container {
+  max-width: 800px;
+  margin: 120px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 
- 
-}
+  h1 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
 
-.hero_wrapper{
+  form {
+    margin-bottom: 20px;
+    
 
+    input[type="text"] {
+      width: 50%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
 
+    button[type="submit"] {
+      width: 20%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
 
+  .error {
+    color: red;
+    margin-bottom: 20px;
+  }
 
-}
+  .definitions {
+    margin-top: 20px;
 
-.hero_container{
-  padding-top: 5rem;
- 
-  
+    h2 {
+      margin-bottom: 10px;
+    }
 
-}
+    .definition {
+      margin-bottom: 20px;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
 
+      h3 {
+        margin-bottom: 5px;
+      }
 
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
 
-.hero {
+        li {
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+
+  .view-all-words {
+    margin-top: 20px;
     text-align: center;
-    margin: 2rem;
 
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-  
-    padding-top: 10px;
-    margin-top: 5rem;
-
-  
-h1{
-  background: #121FCF;
-  background: linear-gradient(to right, #121FCF 0%, #CF1512 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 3rem;
-  font-size: 60px;
-
-animation: customAni 2s ease 0s infinite normal none;
-  
-}
-
-    form {
-      margin-bottom: 2rem;
-  
-      input {
-        padding: 0.5rem;
-        font-size: 1rem;
-        margin-right: 1rem;
-      }
-  
-      button {
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        cursor: pointer;
-      }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
-  
-    .definitions {
-      margin-top: 2rem;
-  
-      .definition {
-        margin-bottom: 1rem;
-  
-        h4 {
-          margin-bottom: 0.5rem;
-        }
-  
-        ul {
-          list-style: none;
-          padding: 0;
-  
-          li {
-            margin-bottom: 0.5rem;
-          }
-        }
-      }
-    }
-  
-    .error {
-      color: red;
-    }
-  }
-
- /* Copy this code after the above code */
-@keyframes customAni {
-  0% {
-	transform: translate(0);
-  }
-
-  10% {
-	transform: translate(-2px, -2px);
-  }
-
-  20% {
-	transform: translate(2px, -2px);
-  }
-
-  30% {
-	transform: translate(-2px, 2px);
-  }
-
-  40% {
-	transform: translate(2px, 2px);
-  }
-
-  50% {
-	transform: translate(-2px, -2px);
-  }
-
-  60% {
-	transform: translate(2px, -2px);
-  }
-
-  70% {
-	transform: translate(-2px, 2px);
-  }
-
-  80% {
-	transform: translate(-2px, -2px);
-  }
-
-  90% {
-	transform: translate(2px, -2px);
-  }
-
-  100% {
-	transform: translate(0);
   }
 }
