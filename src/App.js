@@ -1,14 +1,17 @@
-import React from 'react'; // Ensure React is imported properly
-import Hero from './components/Hero/Hero'; // Ensure the path to the Hero component is correct
-import Header from './components/Header/Header'; // Ensure the path to the Header component is correct
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Homepage from '../src/Homepage/Homepage'
+import AllWords from './components/Allwords/Allwords'
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <Hero />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/all-words" element={<AllWords />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

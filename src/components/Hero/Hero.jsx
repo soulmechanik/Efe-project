@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import './Hero.scss';
 
 const Hero = () => {
   const [word, setWord] = useState('');
   const [definitions, setDefinitions] = useState([]);
   const [error, setError] = useState(null);
-  const [allWords, setAllWords] = useState([]);
+  const [feedback, setFeedback] = useState('');
+  const [showFeedbackInput, setShowFeedbackInput] = useState(false);
 
   const handleInputChange = (e) => {
     setWord(e.target.value);
@@ -20,28 +22,16 @@ const Hero = () => {
       if (data.length > 0 && data[0].meanings.length > 1) {
         setDefinitions(data);
         setError(null);
+        setShowFeedbackInput(false);
       } else {
         setError('Not a homograph or no multiple definitions found.');
         setDefinitions([]);
+        setShowFeedbackInput(true);
       }
     } catch (err) {
       setError('Error fetching definitions');
       setDefinitions([]);
-    }
-  };
-
-  const fetchAllWords = async () => {
-    try {
-      const response = await axios.get('https://random-word-api.herokuapp.com/word?number=1000');
-      const data = response.data;
-
-      if (Array.isArray(data)) {
-        setAllWords(data);
-      } else {
-        console.error('Unexpected response format');
-      }
-    } catch (err) {
-      console.error(err);
+      setShowFeedbackInput(false);
     }
   };
 
@@ -50,8 +40,16 @@ const Hero = () => {
     fetchDefinitions();
   };
 
-  const handleViewAllWords = () => {
-    fetchAllWords();
+  const handleFeedbackChange = (e) => {
+    setFeedback(e.target.value);
+  };
+
+  const handleFeedbackSubmit = (e) => {
+    e.preventDefault();
+    console.log('Feedback submitted:', feedback);
+    // Add code to submit feedback to a database or API
+    setFeedback('');
+    setShowFeedbackInput(false);
   };
 
   return (
@@ -68,7 +66,25 @@ const Hero = () => {
             />
             <button type="submit">Check</button>
           </form>
-          {error && <p className="error">{error}</p>}
+          {error && (
+            <div>
+              <p className="error">{error}</p>
+              <p>
+                This word is not a Homograph in our dictionary.<br/> If you're sure it is a homograph, please send us the word and definition.<br/> We'll definitely work on it as soon as possible.
+              </p>
+              {showFeedbackInput && (
+                <form onSubmit={handleFeedbackSubmit}>
+                  <input
+                    type="text"
+                    value={feedback}
+                    onChange={handleFeedbackChange}
+                    placeholder="Provide feedback (e.g. this word is a homograph with definition XYZ)"
+                  />
+                  <button type="submit">Submit Feedback</button>
+                </form>
+              )}
+            </div>
+          )}
           {definitions.length > 0 && (
             <div className="definitions">
               <h2>The word "{word}" has {definitions.length} homographs:</h2>
@@ -89,17 +105,9 @@ const Hero = () => {
               ))}
             </div>
           )}
-          <button onClick={handleViewAllWords}>View All Words</button>
-          {allWords.length > 0 && (
-            <div className="all-words">
-              <h2>All Words:</h2>
-              <ul>
-                {allWords.map((word, index) => (
-                  <li key={index}>{word}</li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <Link to="/all-words">
+            <button>View All Words</button>
+          </Link>
         </div>
       </div>
     </div>
